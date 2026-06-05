@@ -561,90 +561,91 @@ section { padding: 100px 20px; }
 }
 
 .timeline-wrapper {
-  max-width: 800px;
+  max-width: 680px;
   margin: 0 auto;
   position: relative;
 }
 
 .timeline-line {
   position: absolute;
-  left: 50%;
+  left: 120px;
   top: 0; bottom: 0;
   width: 1px;
   background: linear-gradient(to bottom, transparent, var(--old-rose) 10%, var(--old-rose) 90%, transparent);
-  transform: translateX(-50%);
 }
 
 .timeline-items {
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding-left: 0;
 }
 
+/* Every item: TIME | DOT | CARD */
 .timeline-item {
   display: grid;
-  grid-template-columns: 1fr 60px 1fr;
-  align-items: center;
-  margin-bottom: 32px;
+  grid-template-columns: 100px 40px 1fr;
+  align-items: flex-start;
+  margin-bottom: 28px;
   opacity: 0;
   transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateX(-16px);
 }
 
 .timeline-item.visible { opacity: 1; transform: none !important; }
-.timeline-item:nth-child(odd) { transform: translateX(-20px); }
-.timeline-item:nth-child(even) { transform: translateX(20px); }
 
-.timeline-left {
+/* Time column — always on left */
+.tl-time-col {
   text-align: right;
-  padding-right: 30px;
+  padding-right: 16px;
+  padding-top: 18px;
+  flex-shrink: 0;
 }
 
-.timeline-right {
-  text-align: left;
-  padding-left: 30px;
+.tl-time {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.timeline-item:nth-child(odd) .timeline-left .tl-card { margin-left: auto; }
-.timeline-item:nth-child(even) .timeline-left { grid-column: 3; grid-row: 1; text-align: left; padding-left: 30px; padding-right: 0; }
-.timeline-item:nth-child(even) .timeline-center { grid-column: 2; grid-row: 1; }
-.timeline-item:nth-child(even) .timeline-right { grid-column: 1; grid-row: 1; text-align: right; padding-right: 30px; padding-left: 0; }
-
-.timeline-center {
+/* Dot column — always center */
+.tl-dot-col {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  z-index: 2;
+  padding-top: 20px;
 }
 
 .tl-dot {
-  width: 16px; height: 16px;
+  width: 14px; height: 14px;
   background: var(--white);
   border: 2px solid var(--old-rose);
   border-radius: 50%;
   box-shadow: 0 0 0 4px rgba(192,128,129,0.15);
+  flex-shrink: 0;
+}
+
+/* Card column — always on right */
+.tl-card-col {
+  padding-left: 16px;
 }
 
 .tl-card {
   background: var(--white);
   border-radius: 12px;
-  padding: 20px 24px;
+  padding: 16px 20px;
   box-shadow: 0 4px 24px rgba(192,128,129,0.1);
   border: 1px solid var(--border);
-  max-width: 280px;
-  display: inline-block;
-}
-
-.tl-time {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 6px;
+  display: block;
+  width: 100%;
 }
 
 .tl-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--dark);
   margin-bottom: 4px;
 }
@@ -653,6 +654,24 @@ section { padding: 100px 20px; }
   font-size: 0.75rem;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+/* ===== TIMELINE MOBILE ===== */
+@media (max-width: 600px) {
+  .timeline-wrapper { max-width: 100%; }
+  .timeline-line { left: 72px; }
+  .timeline-item {
+    grid-template-columns: 64px 32px 1fr;
+    margin-bottom: 18px;
+  }
+  .tl-time-col { padding-right: 10px; padding-top: 14px; }
+  .tl-time { font-size: 0.58rem; letter-spacing: 0.1em; }
+  .tl-dot-col { padding-top: 16px; }
+  .tl-dot { width: 12px; height: 12px; }
+  .tl-card-col { padding-left: 10px; }
+  .tl-card { padding: 12px 14px; }
+  .tl-title { font-size: 0.88rem; }
+  .tl-desc { font-size: 0.7rem; }
 }
 
 /* ===== ENTOURAGE ===== */
@@ -1248,11 +1267,13 @@ section { padding: 100px 20px; }
 
 .rsvp-iframe-wrapper iframe {
   width: 100%;
-  height: 600px;
-  min-height: 400px;
+  height: 800px;
   border: none;
   display: block;
-  transition: height 0.3s ease;
+  transition: height 0.4s ease;
+}
+@media (max-width: 600px) {
+  .rsvp-iframe-wrapper iframe { height: 900px; }
 }
 
 /* ===== FAQ ===== */
@@ -1454,62 +1475,7 @@ footer::before {
   .photo-frame:nth-child(1) { grid-column: span 1; grid-row: span 1; }
   .photo-frame:nth-child(6) { grid-column: span 1; }
 
-  .timeline-line { left: 50%; }
-  .timeline-wrapper { max-width: 100%; }
-  .timeline-item {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0;
-    margin-bottom: 20px;
-  }
-  .timeline-item:nth-child(odd),
-  .timeline-item:nth-child(even) {
-    display: flex;
-    flex-direction: row;
-    grid-template-columns: unset;
-  }
-  .timeline-left,
-  .timeline-item:nth-child(even) .timeline-left,
-  .timeline-item:nth-child(odd) .timeline-left {
-    display: flex !important;
-    grid-column: unset;
-    grid-row: unset;
-    text-align: right !important;
-    padding-right: 10px !important;
-    padding-left: 0 !important;
-    flex: 0 0 72px;
-    justify-content: flex-end;
-    align-items: flex-start;
-  }
-  .timeline-right,
-  .timeline-item:nth-child(even) .timeline-right,
-  .timeline-item:nth-child(odd) .timeline-right {
-    grid-column: unset;
-    grid-row: unset;
-    text-align: left !important;
-    padding-left: 10px !important;
-    padding-right: 0 !important;
-    flex: 1;
-  }
-  .timeline-center {
-    flex: 0 0 28px;
-    align-items: flex-start;
-    padding-top: 4px;
-  }
-  .tl-time { font-size: 0.6rem; letter-spacing: 0.1em; margin-bottom: 0; }
-  .tl-left-time {
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    text-transform: uppercase;
-    padding-top: 4px;
-    white-space: nowrap;
-  }
-  .tl-card { max-width: 100%; text-align: left; padding: 14px 16px; }
-  .timeline-item:nth-child(odd) .tl-card,
-  .timeline-item:nth-child(even) .tl-card { margin-left: 0; }
-  .timeline-line { display: none; }
+  /* timeline handled by its own @media block */
 
   section { padding: 70px 20px; }
 }
@@ -1557,38 +1523,46 @@ footer::before {
   flex-shrink: 0;
 }
 
-/* Secondary sponsors single row mobile */
+/* Secondary sponsors — always 3 cols, single row */
 .secondary-sponsors-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-/* Little ones single row mobile */
+/* Little ones — always 4 cols single row */
 .little-ones-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
   align-items: start;
 }
 
 @media (max-width: 768px) {
   .secondary-sponsors-row {
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
   .secondary-sponsors-row .special-role-card {
-    padding: 14px 10px;
+    padding: 12px 8px;
+  }
+  .secondary-sponsors-row .special-role-name {
+    font-size: 0.75rem;
   }
   .little-ones-row {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
   }
   .little-ones-row .special-role-card {
-    padding: 12px 8px;
+    padding: 10px 6px;
   }
   .little-ones-row .special-role-name {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
+    line-height: 1.5;
   }
   .name-list-grid {
     grid-template-columns: 1fr;
@@ -1596,11 +1570,14 @@ footer::before {
 }
 
 @media (max-width: 480px) {
-  .secondary-sponsors-row .special-role-icon { font-size: 1.2rem; }
-  .secondary-sponsors-row .special-role-title { font-size: 0.56rem; }
-  .secondary-sponsors-row .special-role-name { font-size: 0.78rem; }
-  .little-ones-row .special-role-icon { font-size: 1rem; }
-  .little-ones-row .special-role-title { font-size: 0.52rem; }
+  .secondary-sponsors-row { gap: 6px; }
+  .secondary-sponsors-row .special-role-icon { font-size: 1.1rem; margin-bottom: 6px; }
+  .secondary-sponsors-row .special-role-title { font-size: 0.52rem; letter-spacing: 0.1em; }
+  .secondary-sponsors-row .special-role-name { font-size: 0.7rem; }
+  .little-ones-row { gap: 6px; }
+  .little-ones-row .special-role-icon { font-size: 1rem; margin-bottom: 4px; }
+  .little-ones-row .special-role-title { font-size: 0.5rem; letter-spacing: 0.08em; }
+  .little-ones-row .special-role-name { font-size: 0.62rem; }
 }
 
 </style>
@@ -1780,69 +1757,69 @@ footer::before {
   <div class="timeline-wrapper">
     <div class="timeline-line"></div>
     <div class="timeline-items">
+
       <div class="timeline-item">
-        <div class="timeline-left">
+        <div class="tl-time-col"><span class="tl-time">1:30 PM</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card-col">
           <div class="tl-card">
-            <div class="tl-time">1:30 PM</div>
             <div class="tl-title">Entourage Procession</div>
           </div>
         </div>
-        <div class="timeline-center"><div class="tl-dot"></div></div>
-        <div class="timeline-right"></div>
       </div>
+
       <div class="timeline-item">
-        <div class="timeline-left"></div>
-        <div class="timeline-center"><div class="tl-dot"></div></div>
-        <div class="timeline-right">
+        <div class="tl-time-col"><span class="tl-time">2:00 PM</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card-col">
           <div class="tl-card">
-            <div class="tl-time">2:00 PM</div>
             <div class="tl-title">Wedding Ceremony</div>
             <div class="tl-desc">Holy Eucharist &amp; Exchange of Vows</div>
           </div>
         </div>
       </div>
+
       <div class="timeline-item">
-        <div class="timeline-left">
+        <div class="tl-time-col"><span class="tl-time">4:00 PM</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card-col">
           <div class="tl-card">
-            <div class="tl-time">4:00 PM</div>
             <div class="tl-title">Cocktail Hour</div>
             <div class="tl-desc">Garden Gathering &amp; Photo Session</div>
           </div>
         </div>
-        <div class="timeline-center"><div class="tl-dot"></div></div>
-        <div class="timeline-right"></div>
       </div>
+
       <div class="timeline-item">
-        <div class="timeline-left"></div>
-        <div class="timeline-center"><div class="tl-dot"></div></div>
-        <div class="timeline-right">
+        <div class="tl-time-col"><span class="tl-time">5:30 PM</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card-col">
           <div class="tl-card">
-            <div class="tl-time">5:30 PM</div>
-            <div class="tl-title">Reception Entrance</div>
-            <div class="tl-desc">Reception Entrance &amp; Program</div>
+            <div class="tl-title">Reception Entrance &amp; Program</div>
           </div>
         </div>
       </div>
+
       <div class="timeline-item">
-        <div class="timeline-left">
+        <div class="tl-time-col"><span class="tl-time">7:00 PM</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card-col">
           <div class="tl-card">
-            <div class="tl-time">7:00 PM</div>
             <div class="tl-title">Dinner Celebration</div>
           </div>
         </div>
-        <div class="timeline-center"><div class="tl-dot"></div></div>
-        <div class="timeline-right"></div>
       </div>
+
       <div class="timeline-item">
-        <div class="timeline-left"></div>
-        <div class="timeline-center"><div class="tl-dot"></div></div>
-        <div class="timeline-right">
+        <div class="tl-time-col"><span class="tl-time">9:00 PM</span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-card-col">
           <div class="tl-card">
-            <div class="tl-time">9:00 PM</div>
             <div class="tl-title">Grand Send-Off</div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -2006,8 +1983,8 @@ footer::before {
       <div class="dresscode-subtitle">Semi-Formal Attire</div>
       <div class="dress-inspiration">
         <div class="dress-card">
-          <div class="dress-image female" style="background:none; padding:0; height:260px;">
-            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/Principal%20sponsors.jpg" alt="Principal Sponsors" style="width:100%;height:260px;object-fit:cover;display:block;">
+          <div class="dress-image female" style="background:none; padding:0; height:auto;">
+            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/Principal%20sponsors.jpg" alt="Principal Sponsors" style="width:100%;height:260px;object-fit:cover;object-position:top;display:block;">
           </div>
           <div class="dress-card-body">
             <div class="dress-card-title">Principal Sponsors</div>
@@ -2025,8 +2002,8 @@ footer::before {
           </div>
         </div>
         <div class="dress-card">
-          <div class="dress-image male" style="background:none; padding:0; height:260px;">
-            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/secondary%20sponsopr.jpg" alt="Secondary Sponsors" style="width:100%;height:260px;object-fit:cover;display:block;">
+          <div class="dress-image male" style="background:none; padding:0; height:auto;">
+            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/secondary%20sponsopr.jpg" alt="Secondary Sponsors" style="width:100%;height:260px;object-fit:cover;object-position:top;display:block;">
           </div>
           <div class="dress-card-body">
             <div class="dress-card-title">Secondary Sponsors</div>
@@ -2258,15 +2235,39 @@ function downloadQR(type) {
 }
 
 // ===== RSVP IFRAME AUTO-RESIZE =====
-window.addEventListener('message', function(e) {
-  const frame = document.getElementById('rsvpFrame');
+(function() {
+  var frame = document.getElementById('rsvpFrame');
   if (!frame) return;
-  if (typeof e.data === 'number' && e.data > 100) {
-    frame.style.height = (e.data + 40) + 'px';
-  } else if (e.data && e.data.height) {
-    frame.style.height = (e.data.height + 40) + 'px';
-  }
-});
+
+  // Listen for postMessage from the embedded form
+  window.addEventListener('message', function(e) {
+    if (!frame) return;
+    var h = 0;
+    if (typeof e.data === 'number' && e.data > 200) h = e.data;
+    else if (e.data && typeof e.data.height === 'number' && e.data.height > 200) h = e.data.height;
+    else if (e.data && typeof e.data === 'string') {
+      try { var d = JSON.parse(e.data); if (d.height > 200) h = d.height; } catch(err) {}
+    }
+    if (h > 200) frame.style.height = (h + 60) + 'px';
+  });
+
+  // Polling fallback: try to read iframe content height every 2s
+  frame.addEventListener('load', function() {
+    try {
+      var poll = setInterval(function() {
+        try {
+          var doc = frame.contentDocument || frame.contentWindow.document;
+          var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+          if (h > 200) {
+            frame.style.height = (h + 40) + 'px';
+            clearInterval(poll);
+          }
+        } catch(e) { clearInterval(poll); } // cross-origin will throw, that's fine
+      }, 1500);
+      setTimeout(function() { clearInterval(poll); }, 15000);
+    } catch(e) {}
+  });
+})();
 
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(a => {
