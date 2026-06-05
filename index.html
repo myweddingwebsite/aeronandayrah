@@ -257,14 +257,16 @@ nav.scrolled .hamburger span { background: var(--old-rose); }
 
 .countdown-grid {
   display: flex;
-  gap: clamp(12px, 3vw, 28px);
+  gap: clamp(6px, 2vw, 28px);
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .countdown-item {
   text-align: center;
   min-width: 72px;
+  flex-shrink: 1;
 }
 
 .countdown-box {
@@ -1246,9 +1248,11 @@ section { padding: 100px 20px; }
 
 .rsvp-iframe-wrapper iframe {
   width: 100%;
-  height: 700px;
+  height: 600px;
+  min-height: 400px;
   border: none;
   display: block;
+  transition: height 0.3s ease;
 }
 
 /* ===== FAQ ===== */
@@ -1450,30 +1454,155 @@ footer::before {
   .photo-frame:nth-child(1) { grid-column: span 1; grid-row: span 1; }
   .photo-frame:nth-child(6) { grid-column: span 1; }
 
-  .timeline-line { left: 20px; }
+  .timeline-line { left: 50%; }
+  .timeline-wrapper { max-width: 100%; }
   .timeline-item {
-    grid-template-columns: 40px 1fr;
-    grid-template-rows: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 20px;
   }
-  .timeline-item:nth-child(odd) .timeline-left,
-  .timeline-item:nth-child(even) .timeline-left { display: none; }
-  .timeline-item:nth-child(even) .timeline-right { grid-column: 2; grid-row: 1; text-align: left; padding-left: 20px; padding-right: 0; }
-  .timeline-item:nth-child(even) .timeline-center { grid-column: 1; grid-row: 1; }
-  .tl-card { max-width: 100%; text-align: left; }
-  .timeline-item:nth-child(odd) .tl-card { margin-left: 0; }
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: unset;
+  }
+  .timeline-left,
+  .timeline-item:nth-child(even) .timeline-left,
+  .timeline-item:nth-child(odd) .timeline-left {
+    display: flex !important;
+    grid-column: unset;
+    grid-row: unset;
+    text-align: right !important;
+    padding-right: 10px !important;
+    padding-left: 0 !important;
+    flex: 0 0 72px;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  .timeline-right,
+  .timeline-item:nth-child(even) .timeline-right,
+  .timeline-item:nth-child(odd) .timeline-right {
+    grid-column: unset;
+    grid-row: unset;
+    text-align: left !important;
+    padding-left: 10px !important;
+    padding-right: 0 !important;
+    flex: 1;
+  }
+  .timeline-center {
+    flex: 0 0 28px;
+    align-items: flex-start;
+    padding-top: 4px;
+  }
+  .tl-time { font-size: 0.6rem; letter-spacing: 0.1em; margin-bottom: 0; }
+  .tl-left-time {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding-top: 4px;
+    white-space: nowrap;
+  }
+  .tl-card { max-width: 100%; text-align: left; padding: 14px 16px; }
+  .timeline-item:nth-child(odd) .tl-card,
+  .timeline-item:nth-child(even) .tl-card { margin-left: 0; }
+  .timeline-line { display: none; }
 
   section { padding: 70px 20px; }
 }
 
 @media (max-width: 480px) {
   .hero-names { font-size: 3rem; }
-  .countdown-box { padding: 12px 14px; min-width: 60px; }
-  .countdown-num { font-size: 1.8rem; }
+  .countdown-box { padding: 8px 8px; min-width: 0; flex: 1; }
+  .countdown-num { font-size: 1.4rem; }
+  .countdown-sep { font-size: 1.2rem; padding-top: 6px; }
+  .countdown-item { min-width: 0; }
   .sponsors-grid { grid-template-columns: 1fr; }
   .dresscode-roles { grid-template-columns: 1fr; }
   .special-roles { grid-template-columns: 1fr 1fr; }
   .entourage-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ===== NAME LIST (Groomsmen / Bridesmaids) ===== */
+.name-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.name-list-item {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--dark);
+  padding: 12px 16px;
+  background: var(--cream);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+.name-list-item:hover {
+  border-color: var(--old-rose-light);
+  background: rgba(192,128,129,0.05);
+}
+.name-bullet {
+  color: var(--gold);
+  font-size: 0.55rem;
+  flex-shrink: 0;
+}
+
+/* Secondary sponsors single row mobile */
+.secondary-sponsors-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Little ones single row mobile */
+.little-ones-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .secondary-sponsors-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .secondary-sponsors-row .special-role-card {
+    padding: 14px 10px;
+  }
+  .little-ones-row {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .little-ones-row .special-role-card {
+    padding: 12px 8px;
+  }
+  .little-ones-row .special-role-name {
+    font-size: 0.72rem;
+  }
+  .name-list-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .secondary-sponsors-row .special-role-icon { font-size: 1.2rem; }
+  .secondary-sponsors-row .special-role-title { font-size: 0.56rem; }
+  .secondary-sponsors-row .special-role-name { font-size: 0.78rem; }
+  .little-ones-row .special-role-icon { font-size: 1rem; }
+  .little-ones-row .special-role-title { font-size: 0.52rem; }
+}
+
 </style>
 </head>
 <body>
@@ -1573,13 +1702,8 @@ footer::before {
   <div class="details-grid">
     <!-- Ceremony -->
     <div class="detail-card reveal">
-      <div class="detail-image">
-        <div class="detail-image-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 2L12 7M12 7L8 5M12 7L16 5M3 21H21M5 21V10L12 4L19 10V21M9 21V15H15V21"/>
-          </svg>
-          <span>Church Photo</span>
-        </div>
+      <div class="detail-image" style="background:none; padding:0;">
+        <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/Our%20Lady%20of%20Guadalupe%20Parish.webp" alt="Our Lady of Guadalupe Parish" style="width:100%;height:220px;object-fit:cover;display:block;">
         <div class="detail-badge">Ceremony</div>
       </div>
       <div class="detail-body">
@@ -1612,13 +1736,8 @@ footer::before {
 
     <!-- Reception -->
     <div class="detail-card reveal">
-      <div class="detail-image" style="background: linear-gradient(135deg, #d4a0a0 0%, #c08081 100%);">
-        <div class="detail-image-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M8 10v4M12 10v4M16 10v4"/>
-          </svg>
-          <span>Venue Photo</span>
-        </div>
+      <div class="detail-image" style="background:none; padding:0;">
+        <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/caliraya-heights-grand-pavillon.webp" alt="Caliraya Heights Grand Pavilion" style="width:100%;height:220px;object-fit:cover;display:block;">
         <div class="detail-badge">Reception</div>
       </div>
       <div class="detail-body">
@@ -1790,34 +1909,34 @@ footer::before {
     <!-- Groomsmen -->
     <div class="entourage-section reveal">
       <div class="entourage-section-title">Groomsmen</div>
-      <div class="entourage-grid">
-        <div class="entourage-card"><div class="entourage-initial">L</div><div class="entourage-name">Lanz Ezekiel S. Acuña</div></div>
-        <div class="entourage-card"><div class="entourage-initial">C</div><div class="entourage-name">Claudio Limongco</div></div>
-        <div class="entourage-card"><div class="entourage-initial">K</div><div class="entourage-name">Karl Michael B. Bague</div></div>
-        <div class="entourage-card"><div class="entourage-initial">H</div><div class="entourage-name">Hilario Carlo D. Sacluti</div></div>
-        <div class="entourage-card"><div class="entourage-initial">C</div><div class="entourage-name">Cyrille John A. Tampoya</div></div>
+      <div class="name-list-grid">
+        <div class="name-list-item"><span class="name-bullet">✦</span>Lanz Ezekiel S. Acuña</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Claudio Limongco</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Karl Michael B. Bague</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Hilario Carlo D. Sacluti</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Cyrille John A. Tampoya</div>
       </div>
     </div>
 
     <!-- Bridesmaids -->
     <div class="entourage-section reveal">
       <div class="entourage-section-title">Bridesmaids</div>
-      <div class="entourage-grid">
-        <div class="entourage-card"><div class="entourage-initial">M</div><div class="entourage-name">Mariel S. Acuña</div></div>
-        <div class="entourage-card"><div class="entourage-initial">A</div><div class="entourage-name">Arla Margarita S. Acuña</div></div>
-        <div class="entourage-card"><div class="entourage-initial">F</div><div class="entourage-name">Frances Alyanna P. Montemayor</div></div>
-        <div class="entourage-card"><div class="entourage-initial">L</div><div class="entourage-name">Lenny Rose L. Llido</div></div>
-        <div class="entourage-card"><div class="entourage-initial">M</div><div class="entourage-name">Monica O. Jaime</div></div>
-        <div class="entourage-card"><div class="entourage-initial">C</div><div class="entourage-name">Catherine Mae E. Completo</div></div>
-        <div class="entourage-card"><div class="entourage-initial">C</div><div class="entourage-name">Camille Gem Z. Lucero</div></div>
-        <div class="entourage-card"><div class="entourage-initial">P</div><div class="entourage-name">Patricia Angelica V. Vierneza</div></div>
+      <div class="name-list-grid">
+        <div class="name-list-item"><span class="name-bullet">✦</span>Mariel S. Acuña</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Arla Margarita S. Acuña</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Frances Alyanna P. Montemayor</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Lenny Rose L. Llido</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Monica O. Jaime</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Catherine Mae E. Completo</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Camille Gem Z. Lucero</div>
+        <div class="name-list-item"><span class="name-bullet">✦</span>Patricia Angelica V. Vierneza</div>
       </div>
     </div>
 
     <!-- Secondary Sponsors -->
     <div class="entourage-section reveal">
       <div class="entourage-section-title">Secondary Sponsors</div>
-      <div class="special-roles">
+      <div class="secondary-sponsors-row">
         <div class="special-role-card">
           <div class="special-role-icon">🕯️</div>
           <div class="special-role-title">Candle Sponsors</div>
@@ -1839,11 +1958,11 @@ footer::before {
     <!-- Flower Girls & Bearers -->
     <div class="entourage-section reveal">
       <div class="entourage-section-title">The Little Ones</div>
-      <div class="special-roles">
-        <div class="special-role-card" style="grid-column: span 2;">
+      <div class="little-ones-row">
+        <div class="special-role-card">
           <div class="special-role-icon">🌸</div>
           <div class="special-role-title">Flower Girls</div>
-          <div class="special-role-name" style="font-size:0.85rem; line-height:1.8;">
+          <div class="special-role-name" style="font-size:0.82rem; line-height:1.8;">
             Melani Claire D. Acuña<br>
             Franchesca Scarlet R. Jaime<br>
             Emilia Madeleine N. Garcia<br>
@@ -1887,14 +2006,11 @@ footer::before {
       <div class="dresscode-subtitle">Semi-Formal Attire</div>
       <div class="dress-inspiration">
         <div class="dress-card">
-          <div class="dress-image female">
-            <div class="dress-figure">
-              <span class="dress-figure-icon">👗</span>
-              <span>Female Guest Inspiration</span>
-            </div>
+          <div class="dress-image female" style="background:none; padding:0; height:260px;">
+            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/Principal%20sponsors.jpg" alt="Principal Sponsors" style="width:100%;height:260px;object-fit:cover;display:block;">
           </div>
           <div class="dress-card-body">
-            <div class="dress-card-title">For Ladies</div>
+            <div class="dress-card-title">Principal Sponsors</div>
             <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">SUGGESTED COLORS</div>
             <div class="dress-colors">
               <span class="dress-color-chip allowed">Light Pastel Colors</span>
@@ -1909,14 +2025,11 @@ footer::before {
           </div>
         </div>
         <div class="dress-card">
-          <div class="dress-image male">
-            <div class="dress-figure">
-              <span class="dress-figure-icon">👔</span>
-              <span>Male Guest Inspiration</span>
-            </div>
+          <div class="dress-image male" style="background:none; padding:0; height:260px;">
+            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/secondary%20sponsopr.jpg" alt="Secondary Sponsors" style="width:100%;height:260px;object-fit:cover;display:block;">
           </div>
           <div class="dress-card-body">
-            <div class="dress-card-title">For Gentlemen</div>
+            <div class="dress-card-title">Secondary Sponsors</div>
             <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">SUGGESTED COLORS</div>
             <div class="dress-colors">
               <span class="dress-color-chip allowed">Light Pastel Colors</span>
@@ -1932,49 +2045,6 @@ footer::before {
       </div>
     </div>
 
-    <!-- Wedding Party Attire -->
-    <div class="reveal">
-      <div class="dresscode-guest-title" style="margin-bottom:28px;">For the Wedding Party</div>
-      <div class="dresscode-roles">
-        <div class="role-attire-card">
-          <div class="role-attire-title">Principal Sponsors</div>
-          <div class="role-attire-name">Godmothers</div>
-          <div class="role-attire-desc">
-            <span class="role-color-swatch" style="background:#d4b896;"></span> Beige
-            &nbsp;or&nbsp;
-            <span class="role-color-swatch" style="background:#D4AF37;"></span> Gold
-          </div>
-        </div>
-        <div class="role-attire-card">
-          <div class="role-attire-title">Principal Sponsors</div>
-          <div class="role-attire-name">Godfathers</div>
-          <div class="role-attire-desc">
-            White or Beige Barong Tagalog<br>Black Pants
-          </div>
-        </div>
-        <div class="role-attire-card">
-          <div class="role-attire-title">Maid of Honor</div>
-          <div class="role-attire-name">Maid of Honor</div>
-          <div class="role-attire-desc">
-            <span class="role-color-swatch" style="background:#C08081;"></span> Old Rose
-          </div>
-        </div>
-        <div class="role-attire-card">
-          <div class="role-attire-title">Ladies of Honor</div>
-          <div class="role-attire-name">Bridesmaids</div>
-          <div class="role-attire-desc">
-            <span class="role-color-swatch" style="background:#C08081;"></span> Old Rose
-          </div>
-        </div>
-        <div class="role-attire-card">
-          <div class="role-attire-title">Gentlemen of Honor</div>
-          <div class="role-attire-name">Best Man &amp; Groomsmen</div>
-          <div class="role-attire-desc">
-            White or Beige Barong Tagalog<br>Black Pants
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -1992,60 +2062,16 @@ footer::before {
     <div class="qr-card">
       <div class="qr-label">Mobile Payment</div>
       <div class="qr-service">GCash</div>
-      <div class="qr-frame" id="gcashFrame" onclick="document.getElementById('gcashInput').click()">
-        <img id="gcashImg" alt="GCash QR Code">
-        <div class="qr-placeholder" id="gcashPlaceholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-            <rect x="3" y="14" width="7" height="7" rx="1"/>
-            <rect x="14" y="14" width="3" height="3" rx="0.5"/>
-            <rect x="18" y="14" width="3" height="3" rx="0.5"/>
-            <rect x="14" y="18" width="3" height="3" rx="0.5"/>
-            <rect x="18" y="18" width="3" height="3" rx="0.5"/>
-          </svg>
-          <div class="qr-placeholder-text">Tap to upload<br>QR Code</div>
-        </div>
-      </div>
-      <input type="file" class="qr-upload-input" id="gcashInput" accept="image/*" onchange="loadQR(this,'gcash')">
-      <div>
-        <button class="btn-qr" onclick="document.getElementById('gcashInput').click()">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-          Upload
-        </button>
-        <button class="btn-qr" id="gcashDownload" onclick="downloadQR('gcash')" style="display:none">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Download
-        </button>
+      <div class="qr-frame" style="cursor:default; border:none; background:transparent;">
+        <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/airah%20gcash.png" alt="GCash QR Code" style="width:100%;height:100%;object-fit:contain;display:block;">
       </div>
     </div>
 
     <div class="qr-card">
       <div class="qr-label">Bank Transfer</div>
       <div class="qr-service">BPI</div>
-      <div class="qr-frame" id="bpiFrame" onclick="document.getElementById('bpiInput').click()">
-        <img id="bpiImg" alt="BPI QR Code">
-        <div class="qr-placeholder" id="bpiPlaceholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-            <rect x="3" y="14" width="7" height="7" rx="1"/>
-            <rect x="14" y="14" width="3" height="3" rx="0.5"/>
-            <rect x="18" y="14" width="3" height="3" rx="0.5"/>
-            <rect x="14" y="18" width="3" height="3" rx="0.5"/>
-            <rect x="18" y="18" width="3" height="3" rx="0.5"/>
-          </svg>
-          <div class="qr-placeholder-text">Tap to upload<br>QR Code</div>
-        </div>
-      </div>
-      <input type="file" class="qr-upload-input" id="bpiInput" accept="image/*" onchange="loadQR(this,'bpi')">
-      <div>
-        <button class="btn-qr" onclick="document.getElementById('bpiInput').click()">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-          Upload
-        </button>
-        <button class="btn-qr" id="bpiDownload" onclick="downloadQR('bpi')" style="display:none">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Download
-        </button>
+      <div class="qr-frame" style="cursor:default; border:none; background:transparent;">
+        <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/airah%20bpi.png" alt="BPI QR Code" style="width:100%;height:100%;object-fit:contain;display:block;">
       </div>
     </div>
   </div>
@@ -2057,15 +2083,6 @@ footer::before {
   <h2 class="section-title" style="color:var(--white)">Share Your <em style="color:var(--old-rose-light)">Memories</em></h2>
   <div class="ornament" style="opacity:0.5;"><div class="ornament-diamond" style="background:var(--gold-light)"></div></div>
   <p class="section-sub" style="color:rgba(247,231,206,0.7); max-width:480px; margin:0 auto 40px;">Help us relive every beautiful moment by uploading your captured photos and videos.</p>
-
-  <div class="photo-frame-grid">
-    <div class="photo-frame"><div class="photo-frame-inner"><span class="camera-icon">📷</span></div></div>
-    <div class="photo-frame"><div class="photo-frame-inner"><span class="camera-icon">🌹</span></div></div>
-    <div class="photo-frame"><div class="photo-frame-inner"><span class="camera-icon">💍</span></div></div>
-    <div class="photo-frame"><div class="photo-frame-inner"><span class="camera-icon">🕊️</span></div></div>
-    <div class="photo-frame"><div class="photo-frame-inner"><span class="camera-icon">✨</span></div></div>
-    <div class="photo-frame"><div class="photo-frame-inner"><span class="camera-icon">🎊</span></div></div>
-  </div>
 
   <a href="https://drive.google.com/drive/folders/1UyYBijv_f0cJb1bSliap1XjlvXbF2y2_?usp=share_link" target="_blank" class="btn-drive">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2087,7 +2104,7 @@ footer::before {
       Please RSVP by July 15, 2026
     </div>
     <div class="rsvp-iframe-wrapper">
-      <iframe src="https://script.google.com/macros/s/AKfycbxYfVfiWBAqTWRjENkabQIWUuTc5nnLANuIk3JLCf7g41ywZZYnPl8sWD5dslaYiYUGSA/exec" title="RSVP Form" sandbox="allow-scripts allow-forms allow-same-origin allow-top-navigation"></iframe>
+      <iframe id="rsvpFrame" src="https://script.google.com/macros/s/AKfycbxYfVfiWBAqTWRjENkabQIWUuTc5nnLANuIk3JLCf7g41ywZZYnPl8sWD5dslaYiYUGSA/exec" title="RSVP Form" sandbox="allow-scripts allow-forms allow-same-origin allow-top-navigation" scrolling="no"></iframe>
     </div>
   </div>
 </section>
@@ -2239,6 +2256,17 @@ function downloadQR(type) {
   a.download = type + '-qr-aeron-ayrah.png';
   a.click();
 }
+
+// ===== RSVP IFRAME AUTO-RESIZE =====
+window.addEventListener('message', function(e) {
+  const frame = document.getElementById('rsvpFrame');
+  if (!frame) return;
+  if (typeof e.data === 'number' && e.data > 100) {
+    frame.style.height = (e.data + 40) + 'px';
+  } else if (e.data && e.data.height) {
+    frame.style.height = (e.data.height + 40) + 'px';
+  }
+});
 
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(a => {
