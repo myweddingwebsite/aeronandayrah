@@ -905,12 +905,10 @@ section { padding: 100px 20px; }
 }
 
 .dress-image {
-  height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   position: relative;
   overflow: hidden;
+  line-height: 0;
 }
 
 .dress-image.female {
@@ -1523,61 +1521,152 @@ footer::before {
   flex-shrink: 0;
 }
 
-/* Secondary sponsors — always 3 cols, single row */
+/* Secondary sponsors — horizontal rows, one per category */
 .secondary-sponsors-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
   margin: 0 auto;
 }
+.sponsor-row-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  transition: all 0.3s;
+}
+.sponsor-row-item:hover {
+  border-color: var(--old-rose-light);
+  background: rgba(192,128,129,0.05);
+}
+.sponsor-row-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+}
+.sponsor-row-content {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.sponsor-row-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap;
+  margin-right: 12px;
+  min-width: 110px;
+}
+.sponsor-row-names {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.88rem;
+  color: var(--dark);
+  line-height: 1.4;
+}
 
-/* Little ones — always 4 cols single row */
+/* Little ones — horizontal rows, one per category */
 .little-ones-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
   margin: 0 auto;
-  align-items: start;
+}
+.little-row-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  transition: all 0.3s;
+}
+.little-row-item:hover {
+  border-color: var(--old-rose-light);
+  background: rgba(192,128,129,0.05);
+}
+.little-row-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+}
+.little-row-content {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.little-row-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap;
+  margin-right: 12px;
+  min-width: 100px;
+}
+.little-row-names {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.88rem;
+  color: var(--dark);
+  line-height: 1.4;
 }
 
-@media (max-width: 768px) {
-  .secondary-sponsors-row {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .secondary-sponsors-row .special-role-card {
-    padding: 12px 8px;
-  }
-  .secondary-sponsors-row .special-role-name {
-    font-size: 0.75rem;
-  }
+/* Secondary sponsors & little ones mobile tweaks */
+@media (max-width: 600px) {
+  .secondary-sponsors-row,
   .little-ones-row {
-    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
   }
-  .little-ones-row .special-role-card {
-    padding: 10px 6px;
+  .sponsor-row-item,
+  .little-row-item {
+    padding: 11px 14px;
+    gap: 10px;
   }
-  .little-ones-row .special-role-name {
-    font-size: 0.68rem;
-    line-height: 1.5;
+  .sponsor-row-icon,
+  .little-row-icon {
+    font-size: 1.2rem;
+    width: 28px;
+  }
+  .sponsor-row-title,
+  .little-row-title {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    min-width: 88px;
+    margin-right: 8px;
+  }
+  .sponsor-row-names,
+  .little-row-names {
+    font-size: 0.78rem;
   }
   .name-list-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 480px) {
-  .secondary-sponsors-row { gap: 6px; }
-  .secondary-sponsors-row .special-role-icon { font-size: 1.1rem; margin-bottom: 6px; }
-  .secondary-sponsors-row .special-role-title { font-size: 0.52rem; letter-spacing: 0.1em; }
-  .secondary-sponsors-row .special-role-name { font-size: 0.7rem; }
-  .little-ones-row { gap: 6px; }
-  .little-ones-row .special-role-icon { font-size: 1rem; margin-bottom: 4px; }
-  .little-ones-row .special-role-title { font-size: 0.5rem; letter-spacing: 0.08em; }
-  .little-ones-row .special-role-name { font-size: 0.62rem; }
+@media (max-width: 380px) {
+  .sponsor-row-title,
+  .little-row-title {
+    min-width: 76px;
+    font-size: 0.54rem;
+  }
+  .sponsor-row-names,
+  .little-row-names {
+    font-size: 0.72rem;
+  }
 }
 
 </style>
@@ -1914,20 +2003,26 @@ footer::before {
     <div class="entourage-section reveal">
       <div class="entourage-section-title">Secondary Sponsors</div>
       <div class="secondary-sponsors-row">
-        <div class="special-role-card">
-          <div class="special-role-icon">🕯️</div>
-          <div class="special-role-title">Candle Sponsors</div>
-          <div class="special-role-name">Karla Jayne R. Jaime<br>Mark Daniel P. Jaime</div>
+        <div class="sponsor-row-item">
+          <div class="sponsor-row-icon">🕯️</div>
+          <div class="sponsor-row-content">
+            <span class="sponsor-row-title">Candle Sponsors</span>
+            <span class="sponsor-row-names">Karla Jayne R. Jaime &amp; Mark Daniel P. Jaime</span>
+          </div>
         </div>
-        <div class="special-role-card">
-          <div class="special-role-icon">🤍</div>
-          <div class="special-role-title">Veil Sponsors</div>
-          <div class="special-role-name">Monica Olive A. Narvadez<br>Ian A. Narvadez</div>
+        <div class="sponsor-row-item">
+          <div class="sponsor-row-icon">🤍</div>
+          <div class="sponsor-row-content">
+            <span class="sponsor-row-title">Veil Sponsors</span>
+            <span class="sponsor-row-names">Monica Olive A. Narvadez &amp; Ian A. Narvadez</span>
+          </div>
         </div>
-        <div class="special-role-card">
-          <div class="special-role-icon">🪢</div>
-          <div class="special-role-title">Cord Sponsors</div>
-          <div class="special-role-name">Jamie Claire B. Dalope<br>Mon Gabriel S. Acuña</div>
+        <div class="sponsor-row-item">
+          <div class="sponsor-row-icon">🪢</div>
+          <div class="sponsor-row-content">
+            <span class="sponsor-row-title">Cord Sponsors</span>
+            <span class="sponsor-row-names">Jamie Claire B. Dalope &amp; Mon Gabriel S. Acuña</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1936,30 +2031,33 @@ footer::before {
     <div class="entourage-section reveal">
       <div class="entourage-section-title">The Little Ones</div>
       <div class="little-ones-row">
-        <div class="special-role-card">
-          <div class="special-role-icon">🌸</div>
-          <div class="special-role-title">Flower Girls</div>
-          <div class="special-role-name" style="font-size:0.82rem; line-height:1.8;">
-            Melani Claire D. Acuña<br>
-            Franchesca Scarlet R. Jaime<br>
-            Emilia Madeleine N. Garcia<br>
-            Melani Amor A. Limongco
+        <div class="little-row-item">
+          <div class="little-row-icon">🌸</div>
+          <div class="little-row-content">
+            <span class="little-row-title">Flower Girls</span>
+            <span class="little-row-names">Melani Claire D. Acuña &middot; Franchesca Scarlet R. Jaime &middot; Emilia Madeleine N. Garcia &middot; Melani Amor A. Limongco</span>
           </div>
         </div>
-        <div class="special-role-card">
-          <div class="special-role-icon">📖</div>
-          <div class="special-role-title">Bible Bearer</div>
-          <div class="special-role-name">Joseph Keith D. Acuña</div>
+        <div class="little-row-item">
+          <div class="little-row-icon">📖</div>
+          <div class="little-row-content">
+            <span class="little-row-title">Bible Bearer</span>
+            <span class="little-row-names">Joseph Keith D. Acuña</span>
+          </div>
         </div>
-        <div class="special-role-card">
-          <div class="special-role-icon">🪙</div>
-          <div class="special-role-title">Coin Bearer</div>
-          <div class="special-role-name">Lester Gideon G. Morales</div>
+        <div class="little-row-item">
+          <div class="little-row-icon">🪙</div>
+          <div class="little-row-content">
+            <span class="little-row-title">Coin Bearer</span>
+            <span class="little-row-names">Lester Gideon G. Morales</span>
+          </div>
         </div>
-        <div class="special-role-card">
-          <div class="special-role-icon">💍</div>
-          <div class="special-role-title">Ring Bearer</div>
-          <div class="special-role-name">Timothy John R. Pingol</div>
+        <div class="little-row-item">
+          <div class="little-row-icon">💍</div>
+          <div class="little-row-content">
+            <span class="little-row-title">Ring Bearer</span>
+            <span class="little-row-names">Timothy John R. Pingol</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1984,7 +2082,7 @@ footer::before {
       <div class="dress-inspiration">
         <div class="dress-card">
           <div class="dress-image female" style="background:none; padding:0; height:auto;">
-            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/Principal%20sponsors.jpg" alt="Principal Sponsors" style="width:100%;height:260px;object-fit:cover;object-position:top;display:block;">
+            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/Principal%20sponsors.jpg" alt="Principal Sponsors" style="width:100%;height:auto;display:block;">
           </div>
           <div class="dress-card-body">
             <div class="dress-card-title">Principal Sponsors</div>
@@ -2003,7 +2101,7 @@ footer::before {
         </div>
         <div class="dress-card">
           <div class="dress-image male" style="background:none; padding:0; height:auto;">
-            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/secondary%20sponsopr.jpg" alt="Secondary Sponsors" style="width:100%;height:260px;object-fit:cover;object-position:top;display:block;">
+            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/secondary%20sponsopr.jpg" alt="Secondary Sponsors" style="width:100%;height:auto;display:block;">
           </div>
           <div class="dress-card-body">
             <div class="dress-card-title">Secondary Sponsors</div>
