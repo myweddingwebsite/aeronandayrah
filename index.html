@@ -947,6 +947,7 @@ section { padding: 100px 20px; }
   font-size: 1.1rem;
   color: var(--dark);
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .dress-colors {
@@ -2035,7 +2036,7 @@ footer::before {
           <div class="little-row-icon">🌸</div>
           <div class="little-row-content">
             <span class="little-row-title">Flower Girls</span>
-            <span class="little-row-names">Melani Claire D. Acuña <br> Franchesca Scarlet R. Jaime <br> Emilia Madeleine N. Garcia <br> Melani Amor A. Limongco</span>
+            <span class="little-row-names">Melani Claire D. Acuña &middot; Franchesca Scarlet R. Jaime &middot; Emilia Madeleine N. Garcia &middot; Melani Amor A. Limongco</span>
           </div>
         </div>
         <div class="little-row-item">
@@ -2075,45 +2076,52 @@ footer::before {
 
   <div class="dresscode-wrapper">
 
-    <!-- Guest Attire -->
+    <!-- Principal Sponsors -->
     <div class="dresscode-guest reveal">
-      <div class="dresscode-guest-title">For Our Guests</div>
-      <div class="dresscode-subtitle">Semi-Formal Attire</div>
-      <div class="dress-inspiration">
+      <div class="dress-inspiration" style="margin-bottom:28px;">
         <div class="dress-card">
-          <div class="dress-image female" style="background:none; padding:0; height:auto;">
+          <div class="dress-image" style="background:none; padding:0; height:auto;">
             <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/Principal%20sponsors.jpg" alt="Principal Sponsors" style="width:100%;height:auto;display:block;">
           </div>
-          <div class="dress-card-body">
+          <div class="dress-card-body" style="text-align:center;">
             <div class="dress-card-title">Principal Sponsors</div>
-            <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">SUGGESTED COLORS</div>
-            <div class="dress-colors">
-              <span class="dress-color-chip allowed">Light Pastel Colors</span>
-              <span class="dress-color-chip allowed">Neutral Tones</span>
-              <span class="dress-color-chip allowed">Soft Blush</span>
-            </div>
-            <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">NOT ALLOWED</div>
-            <div class="dress-colors">
-              <span class="dress-color-chip not-allowed">Denim Jeans</span>
-              <span class="dress-color-chip not-allowed">Casual Wear</span>
-            </div>
           </div>
         </div>
+
+        <!-- Secondary Sponsors -->
         <div class="dress-card">
-          <div class="dress-image male" style="background:none; padding:0; height:auto;">
-            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/secondary%20sponsopr.jpg" alt="Secondary Sponsors" style="width:100%;height:auto;display:block;">
+          <div class="dress-image" style="background:none; padding:0; height:auto;">
+            <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/secondary%20sponsor.jpg" alt="Secondary Sponsors" style="width:100%;height:auto;display:block;">
           </div>
-          <div class="dress-card-body">
+          <div class="dress-card-body" style="text-align:center;">
             <div class="dress-card-title">Secondary Sponsors</div>
-            <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">SUGGESTED COLORS</div>
-            <div class="dress-colors">
-              <span class="dress-color-chip allowed">Light Pastel Colors</span>
-              <span class="dress-color-chip allowed">Neutral Colors</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guest Attire — full width card with colors -->
+      <div class="dress-card" style="max-width:100%; border-radius:16px; overflow:hidden; box-shadow:0 8px 32px rgba(192,128,129,0.12);">
+        <div class="dress-image" style="background:none; padding:0; height:auto;">
+          <img src="https://raw.githubusercontent.com/myweddingwebsite/aeronandayrah/refs/heads/main/guest%20attire.jpg" alt="Guest Attire" style="width:100%;height:auto;display:block;">
+        </div>
+        <div class="dress-card-body" style="text-align:center;">
+          <div class="dress-card-title">Guest Attire</div>
+          <div class="dresscode-subtitle" style="margin-bottom:20px;">Semi-Formal Attire</div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:24px;">
+            <div>
+              <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">SUGGESTED COLORS</div>
+              <div class="dress-colors" style="justify-content:center;">
+                <span class="dress-color-chip allowed">Light Pastel Colors</span>
+                <span class="dress-color-chip allowed">Neutral Tones</span>
+                <span class="dress-color-chip allowed">Soft Blush</span>
+              </div>
             </div>
-            <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">NOT ALLOWED</div>
-            <div class="dress-colors">
-              <span class="dress-color-chip not-allowed">Denim Jeans</span>
-              <span class="dress-color-chip not-allowed">Overly Casual</span>
+            <div>
+              <div style="margin-bottom:8px; font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;">NOT ALLOWED</div>
+              <div class="dress-colors" style="justify-content:center;">
+                <span class="dress-color-chip not-allowed">Denim Jeans</span>
+                <span class="dress-color-chip not-allowed">Overly Casual Wear</span>
+              </div>
             </div>
           </div>
         </div>
